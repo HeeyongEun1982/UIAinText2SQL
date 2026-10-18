@@ -1,0 +1,55 @@
+﻿pattern,direction,locus,locus_ko,query_n,combined_ground_truth_difference_n,combined_ground_truth_difference_percent,transition_relevant_n,transition_analysis_eligible_n,transition_relevant_percent
+001,combined_correct,source_join,사용한 테이블 또는 조인,150,85,56.67,26,150,17.33
+001,combined_correct,filter_literal,필터 조건 또는 비교값,150,96,64.0,31,150,20.67
+001,combined_correct,calculation_aggregation,계산 또는 집계,150,95,63.33,25,150,16.67
+001,combined_correct,grouping_deduplication,그룹화 또는 중복 처리,150,53,35.33,38,150,25.33
+001,combined_correct,output_projection,출력 열과 표시 형식,150,84,56.0,51,150,34.0
+001,combined_correct,ordering_limit,"정렬, 결과 수 또는 동률 처리",150,55,36.67,18,150,12.0
+010,combined_incorrect,source_join,사용한 테이블 또는 조인,51,35,68.63,22,50,44.0
+010,combined_incorrect,filter_literal,필터 조건 또는 비교값,51,36,70.59,20,50,40.0
+010,combined_incorrect,calculation_aggregation,계산 또는 집계,51,33,64.71,14,50,28.0
+010,combined_incorrect,grouping_deduplication,그룹화 또는 중복 처리,51,23,45.1,15,50,30.0
+010,combined_incorrect,output_projection,출력 열과 표시 형식,51,39,76.47,17,50,34.0
+010,combined_incorrect,ordering_limit,"정렬, 결과 수 또는 동률 처리",51,17,33.33,12,50,24.0
+011,combined_correct,source_join,사용한 테이블 또는 조인,61,38,62.3,9,60,15.0
+011,combined_correct,filter_literal,필터 조건 또는 비교값,61,42,68.85,18,60,30.0
+011,combined_correct,calculation_aggregation,계산 또는 집계,61,31,50.82,11,60,18.33
+011,combined_correct,grouping_deduplication,그룹화 또는 중복 처리,61,19,31.15,12,60,20.0
+011,combined_correct,output_projection,출력 열과 표시 형식,61,29,47.54,18,60,30.0
+011,combined_correct,ordering_limit,"정렬, 결과 수 또는 동률 처리",61,18,29.51,10,60,16.67
+100,combined_incorrect,source_join,사용한 테이블 또는 조인,62,33,53.23,8,62,12.9
+100,combined_incorrect,filter_literal,필터 조건 또는 비교값,62,50,80.65,17,62,27.42
+100,combined_incorrect,calculation_aggregation,계산 또는 집계,62,41,66.13,9,62,14.52
+100,combined_incorrect,grouping_deduplication,그룹화 또는 중복 처리,62,29,46.77,12,62,19.35
+100,combined_incorrect,output_projection,출력 열과 표시 형식,62,52,83.87,24,62,38.71
+100,combined_incorrect,ordering_limit,"정렬, 결과 수 또는 동률 처리",62,32,51.61,13,62,20.97
+101,combined_correct,source_join,사용한 테이블 또는 조인,105,54,51.43,11,103,10.68
+101,combined_correct,filter_literal,필터 조건 또는 비교값,105,63,60.0,10,103,9.71
+101,combined_correct,calculation_aggregation,계산 또는 집계,105,50,47.62,6,103,5.83
+101,combined_correct,grouping_deduplication,그룹화 또는 중복 처리,105,51,48.57,17,103,16.5
+101,combined_correct,output_projection,출력 열과 표시 형식,105,35,33.33,53,103,51.46
+101,combined_correct,ordering_limit,"정렬, 결과 수 또는 동률 처리",105,53,50.48,5,103,4.85
+110,combined_incorrect,source_join,사용한 테이블 또는 조인,57,30,52.63,14,56,25.0
+110,combined_incorrect,filter_literal,필터 조건 또는 비교값,57,40,70.18,26,56,46.43
+110,combined_incorrect,calculation_aggregation,계산 또는 집계,57,36,63.16,12,56,21.43
+110,combined_incorrect,grouping_deduplication,그룹화 또는 중복 처리,57,21,36.84,13,56,23.21
+110,combined_incorrect,output_projection,출력 열과 표시 형식,57,50,87.72,29,56,51.79
+110,combined_incorrect,ordering_limit,"정렬, 결과 수 또는 동률 처리",57,19,33.33,11,56,19.64
+ALL,combined_correct,source_join,사용한 테이블 또는 조인,316,177,56.01,46,313,14.7
+ALL,combined_correct,filter_literal,필터 조건 또는 비교값,316,201,63.61,59,313,18.85
+ALL,combined_correct,calculation_aggregation,계산 또는 집계,316,176,55.7,42,313,13.42
+ALL,combined_correct,grouping_deduplication,그룹화 또는 중복 처리,316,123,38.92,67,313,21.41
+ALL,combined_correct,output_projection,출력 열과 표시 형식,316,148,46.84,122,313,38.98
+ALL,combined_correct,ordering_limit,"정렬, 결과 수 또는 동률 처리",316,126,39.87,33,313,10.54
+ALL,combined_incorrect,source_join,사용한 테이블 또는 조인,170,98,57.65,44,168,26.19
+ALL,combined_incorrect,filter_literal,필터 조건 또는 비교값,170,126,74.12,63,168,37.5
+ALL,combined_incorrect,calculation_aggregation,계산 또는 집계,170,110,64.71,35,168,20.83
+ALL,combined_incorrect,grouping_deduplication,그룹화 또는 중복 처리,170,73,42.94,40,168,23.81
+ALL,combined_incorrect,output_projection,출력 열과 표시 형식,170,141,82.94,70,168,41.67
+ALL,combined_incorrect,ordering_limit,"정렬, 결과 수 또는 동률 처리",170,68,40.0,36,168,21.43
+ALL,all_changed,source_join,사용한 테이블 또는 조인,486,275,56.58,90,481,18.71
+ALL,all_changed,filter_literal,필터 조건 또는 비교값,486,327,67.28,122,481,25.36
+ALL,all_changed,calculation_aggregation,계산 또는 집계,486,286,58.85,77,481,16.01
+ALL,all_changed,grouping_deduplication,그룹화 또는 중복 처리,486,196,40.33,107,481,22.25
+ALL,all_changed,output_projection,출력 열과 표시 형식,486,289,59.47,192,481,39.92
+ALL,all_changed,ordering_limit,"정렬, 결과 수 또는 동률 처리",486,194,39.92,69,481,14.35

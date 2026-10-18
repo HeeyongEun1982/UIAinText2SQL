@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "intent-sql-agent"
+version = "0.1.0"
+description = "Two-layer business-intent clarification pipeline for BIRD Text-to-SQL"
+requires-python = ">=3.10"
+dependencies = [
+  "jsonschema>=4.20",
+  "openai>=2.0",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,12 @@
+﻿classification,category,category_label,query_n,count,percent
+primary_difference_first_observable_stage,confirmed_bif,Confirmed BIF,170,81,47.65
+primary_difference_first_observable_stage,initial_sif,Initial SIF after grounding,170,51,30.0
+primary_difference_first_observable_stage,later_sif,Later SIF clarification or refinement,170,36,21.18
+primary_difference_first_observable_stage,sql_synthesis,First SQL synthesis,170,0,0.0
+primary_difference_first_observable_stage,unresolved_timeout,Unresolved execution timeout,170,2,1.18
+bif_to_sif_handoff,high_confidence_bif_choice_changed_in_sif,High-confidence Gold-aligned Confirmed BIF choice changed in SIF,170,46,27.06
+bif_to_sif_handoff,ambiguous_bif_to_sif_change_candidate,Ambiguous BIF-to-SIF change candidate,170,10,5.88
+bif_to_sif_handoff,no_coded_bif_to_sif_handoff_change,No coded BIF-to-SIF handoff change,170,114,67.06
+sql_finalisation,synthesized_sql_equals_final_sql,First synthesized SQL equals retained final SQL,170,167,98.24
+sql_finalisation,sql_changed_after_synthesis,SQL changed after synthesis,170,3,1.76
+sql_finalisation,primary_mismatch_first_created_after_synthesis,Primary mismatch first created after synthesis,170,0,0.0

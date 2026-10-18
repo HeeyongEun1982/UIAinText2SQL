@@ -1,0 +1,4 @@
+﻿condition,n,official_correct,internal_strict_correct,internal_relaxed_correct,official_1_strict_0,official_0_strict_1,official_1_relaxed_0,official_0_relaxed_1,strict_0_relaxed_1,strict_1_relaxed_0
+bif_only,1534,916,857,905,61,2,61,50,48,0
+sif_only,1534,861,789,910,75,3,75,124,121,0
+bif_sif,1534,1008,985,1088,24,1,24,104,103,0

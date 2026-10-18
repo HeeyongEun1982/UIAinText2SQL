@@ -1,0 +1,37 @@
+﻿classification,direction,category,category_label,query_n,count,percent
+lexically_localised_clarification_stage,combined_correct,bif_before_grounding,BIF clarification (before grounding),316,175,55.38
+lexically_localised_clarification_stage,combined_correct,sif_after_grounding,SIF clarification (after grounding),316,19,6.01
+lexically_localised_clarification_stage,combined_correct,no_relevant_clarification_record,No relevant clarification record (choice observed in final SQL),316,9,2.85
+lexically_localised_clarification_stage,combined_correct,not_localised,Relevant clarification not localised,316,113,35.76
+lexically_localised_clarification_stage,combined_incorrect,bif_before_grounding,BIF clarification (before grounding),170,94,55.29
+lexically_localised_clarification_stage,combined_incorrect,sif_after_grounding,SIF clarification (after grounding),170,11,6.47
+lexically_localised_clarification_stage,combined_incorrect,no_relevant_clarification_record,No relevant clarification record (choice observed in final SQL),170,18,10.59
+lexically_localised_clarification_stage,combined_incorrect,not_localised,Relevant clarification not localised,170,47,27.65
+lexically_localised_clarification_stage,all_changed,bif_before_grounding,BIF clarification (before grounding),486,269,55.35
+lexically_localised_clarification_stage,all_changed,sif_after_grounding,SIF clarification (after grounding),486,30,6.17
+lexically_localised_clarification_stage,all_changed,no_relevant_clarification_record,No relevant clarification record (choice observed in final SQL),486,27,5.56
+lexically_localised_clarification_stage,all_changed,not_localised,Relevant clarification not localised,486,160,32.92
+relevant_stage_presence,combined_correct,bif_only,BIF stage only,316,10,3.16
+relevant_stage_presence,combined_correct,sif_only,SIF stage only,316,19,6.01
+relevant_stage_presence,combined_correct,both,Both BIF and SIF stages,316,165,52.22
+relevant_stage_presence,combined_correct,none,No relevant clarification,316,9,2.85
+relevant_stage_presence,combined_correct,not_localised,Relevant clarification not localised,316,113,35.76
+relevant_stage_presence,combined_incorrect,bif_only,BIF stage only,170,2,1.18
+relevant_stage_presence,combined_incorrect,sif_only,SIF stage only,170,11,6.47
+relevant_stage_presence,combined_incorrect,both,Both BIF and SIF stages,170,92,54.12
+relevant_stage_presence,combined_incorrect,none,No relevant clarification,170,18,10.59
+relevant_stage_presence,combined_incorrect,not_localised,Relevant clarification not localised,170,47,27.65
+relevant_stage_presence,all_changed,bif_only,BIF stage only,486,12,2.47
+relevant_stage_presence,all_changed,sif_only,SIF stage only,486,30,6.17
+relevant_stage_presence,all_changed,both,Both BIF and SIF stages,486,257,52.88
+relevant_stage_presence,all_changed,none,No relevant clarification,486,27,5.56
+relevant_stage_presence,all_changed,not_localised,Relevant clarification not localised,486,160,32.92
+observable_process_path,combined_correct,same_choice_in_clarification_and_sql,Same choice observed in prior clarification and final SQL,316,226,71.52
+observable_process_path,combined_correct,partial_or_conflicting_correspondence,Incomplete or conflicting relation across clarification records and final SQL,316,81,25.63
+observable_process_path,combined_correct,no_relevant_clarification_record,No relevant clarification record for the choice observed in final SQL,316,9,2.85
+observable_process_path,combined_incorrect,same_choice_in_clarification_and_sql,Same choice observed in prior clarification and final SQL,170,121,71.18
+observable_process_path,combined_incorrect,partial_or_conflicting_correspondence,Incomplete or conflicting relation across clarification records and final SQL,170,31,18.24
+observable_process_path,combined_incorrect,no_relevant_clarification_record,No relevant clarification record for the choice observed in final SQL,170,18,10.59
+observable_process_path,all_changed,same_choice_in_clarification_and_sql,Same choice observed in prior clarification and final SQL,486,347,71.4
+observable_process_path,all_changed,partial_or_conflicting_correspondence,Incomplete or conflicting relation across clarification records and final SQL,486,112,23.05
+observable_process_path,all_changed,no_relevant_clarification_record,No relevant clarification record for the choice observed in final SQL,486,27,5.56

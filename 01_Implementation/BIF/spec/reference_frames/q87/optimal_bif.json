@@ -1,0 +1,180 @@
+{
+  "schema_version": "1.1",
+  "frame_id": "reference_bif_q87",
+  "source": {
+    "question_id": 87,
+    "db_id": "california_schools",
+    "question": "What are the valid e-mail addresses of the administrator of the school located in the San Bernardino county, City of San Bernardino City Unified that opened between 1/1/2009 to 12/31/2010 whose school types are public Intermediate/Middle Schools and Unified Schools?"
+  },
+  "lifecycle": {
+    "state": "confirmed",
+    "revision": 1,
+    "confirmed_by": "development_reference_from_question_and_gold_sql",
+    "confirmed_at": null
+  },
+  "decision_objective": {
+    "summary": "Return the administrator e-mail addresses recorded for schools satisfying all stated location, opening-period, and classification conditions.",
+    "intent_types": ["retrieve", "filter"]
+  },
+  "target_population": {
+    "primary_entity": "school",
+    "entity_description": "Schools in San Bernardino County and the city of San Bernardino, opened from 1 January 2009 through 31 December 2010, that are both public intermediate/middle schools and unified schools under the two stated business classifications.",
+    "inclusion_conditions": [
+      {
+        "condition_id": "county_san_bernardino",
+        "semantic_dimension": "geographic_county",
+        "source_text": "San Bernardino county",
+        "business_concept": "school county",
+        "semantic_dimension_status": "explicit",
+        "grounding_requirement": "schema",
+        "state": "explicit",
+        "subject": "school county",
+        "operator": "equals",
+        "value_mode": "scalar",
+        "set_relation": "not_applicable",
+        "value": "San Bernardino",
+        "description": "The school's county is San Bernardino."
+      },
+      {
+        "condition_id": "city_san_bernardino",
+        "semantic_dimension": "geographic_city",
+        "source_text": "City of San Bernardino",
+        "business_concept": "school city",
+        "semantic_dimension_status": "explicit",
+        "grounding_requirement": "schema",
+        "state": "explicit",
+        "subject": "school city",
+        "operator": "equals",
+        "value_mode": "scalar",
+        "set_relation": "not_applicable",
+        "value": "San Bernardino",
+        "description": "The school's city is San Bernardino."
+      },
+      {
+        "condition_id": "public_intermediate_middle",
+        "semantic_dimension": null,
+        "source_text": "public Intermediate/Middle Schools",
+        "business_concept": "public intermediate or middle school classification",
+        "semantic_dimension_status": "deferred_to_sif",
+        "grounding_requirement": "schema",
+        "state": "explicit",
+        "subject": "public intermediate or middle school classification",
+        "operator": "equals",
+        "value_mode": "scalar",
+        "set_relation": "not_applicable",
+        "value": "public Intermediate/Middle Schools",
+        "description": "The school satisfies the stated public intermediate/middle classification."
+      },
+      {
+        "condition_id": "unified_school",
+        "semantic_dimension": null,
+        "source_text": "Unified Schools",
+        "business_concept": "unified school classification",
+        "semantic_dimension_status": "deferred_to_sif",
+        "grounding_requirement": "schema",
+        "state": "explicit",
+        "subject": "unified school classification",
+        "operator": "equals",
+        "value_mode": "scalar",
+        "set_relation": "not_applicable",
+        "value": "Unified Schools",
+        "description": "The school satisfies the stated unified-school classification."
+      }
+    ],
+    "inclusion_logic": {
+      "operator": "all_of",
+      "condition_refs": [
+        "county_san_bernardino",
+        "city_san_bernardino",
+        "public_intermediate_middle",
+        "unified_school"
+      ],
+      "groups": []
+    },
+    "exclusion_conditions": [],
+    "exclusion_logic": {
+      "operator": "none_of",
+      "condition_refs": [],
+      "groups": []
+    }
+  },
+  "metrics": [
+    {
+      "metric_id": "administrator_email_addresses",
+      "name": "Administrator e-mail addresses",
+      "definition": "Administrator e-mail address values as recorded in the available administrator e-mail slots; no independent syntax, activity, or deliverability verification is requested.",
+      "measure_kind": "attribute",
+      "unit": null,
+      "validation_semantics": {
+        "status": "not_applicable",
+        "rule": null
+      }
+    }
+  ],
+  "calculation": {
+    "steps": [],
+    "null_handling": null,
+    "duplicate_handling": null
+  },
+  "granularity": {
+    "input_unit": "school record",
+    "output_unit": "matching school record",
+    "dimensions": []
+  },
+  "scope": {
+    "grouping_dimensions": [],
+    "selections": []
+  },
+  "time_basis": {
+    "mode": "fixed_period",
+    "description": "School opening date from 1 January 2009 through 31 December 2010, inclusive.",
+    "periods": [
+      {
+        "start": "2009-01-01",
+        "end": "2010-12-31",
+        "grain": "day"
+      }
+    ],
+    "temporal_semantics": "event_time",
+    "cumulative": false
+  },
+  "comparisons": [],
+  "output_expectation": {
+    "shape": "detail_list",
+    "fields": [
+      {
+        "field_id": "administrator_email_addresses_output",
+        "label": "Administrator e-mail addresses",
+        "semantic_ref": "administrator_email_addresses",
+        "source_text": "valid e-mail addresses of the administrator",
+        "requested": true,
+        "value_multiplicity": "multiple",
+        "coverage": "all_requested",
+        "presentation": "separate_columns"
+      }
+    ],
+    "ordering": [],
+    "limit": null,
+    "include_supporting_values": false
+  },
+  "assumptions": [],
+  "field_states": [
+    {
+      "path": "/target_population/inclusion_conditions/public_intermediate_middle/semantic_dimension",
+      "state": "explicit",
+      "material": true,
+      "note": "The question fixes the business term; schema grounding fixes its physical classification dimension."
+    },
+    {
+      "path": "/target_population/inclusion_conditions/unified_school/semantic_dimension",
+      "state": "explicit",
+      "material": true,
+      "note": "The question fixes the business term; schema grounding fixes its physical classification dimension."
+    }
+  ],
+  "readiness": {
+    "state": "ready",
+    "blocking_paths": [],
+    "reason": null
+  }
+}

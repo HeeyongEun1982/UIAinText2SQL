@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/sql-intent-frame-1.0.json",
+  "title": "SQL Intent Frame",
+  "description": "System-generated, schema-grounded intermediate query representation derived from a confirmed Business Intent Frame.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "sql_intent_id",
+    "source_frame_id",
+    "database",
+    "status",
+    "query_blocks",
+    "main_block_id",
+    "traceability",
+    "unresolved_grounding"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "sql_intent_id": {"type": "string", "minLength": 1},
+    "source_frame_id": {"type": "string", "minLength": 1},
+    "database": {"$ref": "#/$defs/database"},
+    "status": {"enum": ["draft", "needs_clarification", "awaiting_confirmation", "needs_grounding", "confirmed", "ready", "blocked"]},
+    "query_blocks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/queryBlock"}
+    },
+    "main_block_id": {"type": "string", "minLength": 1},
+    "traceability": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/trace"}
+    },
+    "unresolved_grounding": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/unresolved"}
+    }
+  },
+  "$defs": {
+    "database": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["db_id", "dialect", "schema_fingerprint"],
+      "properties": {
+        "db_id": {"type": "string", "minLength": 1},
+        "dialect": {"type": "string", "minLength": 1},
+        "schema_fingerprint": {"type": ["string", "null"]}
+      }
+    },
+    "queryBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "block_id", "role", "sources", "joins", "where", "derived_fields",
+        "group_by", "having", "windows", "projection", "distinct",
+        "order_by", "limit", "set_operations", "intent_paths"
+      ],
+      "properties": {
+        "block_id": {"type": "string", "minLength": 1},
+        "role": {"enum": ["main", "filter", "aggregation", "ranking", "comparison", "set_operand", "custom"]},
+        "sources": {"type": "array", "items": {"$ref": "#/$defs/source"}},
+        "joins": {"type": "array", "items": {"$ref": "#/$defs/join"}},
+        "where": {"type": "array", "items": {"$ref": "#/$defs/expression"}},
+        "derived_fields": {"type": "array", "items": {"$ref": "#/$defs/derivedField"}},
+        "group_by": {"type": "array", "items": {"$ref": "#/$defs/expression"}},
+        "having": {"type": "array", "items": {"$ref": "#/$defs/expression"}},
+        "windows": {"type": "array", "items": {"$ref": "#/$defs/window"}},
+        "projection": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/projection"}},
+        "distinct": {"type": "boolean"},
+        "order_by": {"type": "array", "items": {"$ref": "#/$defs/ordering"}},
+        "limit": {"$ref": "#/$defs/limit"},
+        "set_operations": {"type": "array", "items": {"$ref": "#/$defs/setOperation"}},
+        "intent_paths": {"type": "array", "items": {"$ref": "#/$defs/intentPath"}}
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "kind", "name", "block_ref", "alias", "intent_paths"],
+      "properties": {
+        "source_id": {"type": "string", "minLength": 1},
+        "kind": {"enum": ["table", "view", "query_block"]},
+        "name": {"type": ["string", "null"]},
+        "block_ref": {"type": ["string", "null"], "description": "Required when kind=query_block; identifies the referenced query block whose projected outputs form this source's column contract."},
+        "alias": {"type": ["string", "null"]},
+        "intent_paths": {"type": "array", "items": {"$ref": "#/$defs/intentPath"}}
+      }
+    },
+    "join": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["join_id", "type", "left_source", "right_source", "predicates", "intent_paths"],
+      "properties": {
+        "join_id": {"type": "string", "minLength": 1},
+        "type": {"enum": ["inner", "left", "right", "full", "cross"]},
+        "left_source": {"type": "string", "minLength": 1},
+        "right_source": {"type": "string", "minLength": 1},
+        "predicates": {"type": "array", "items": {"$ref": "#/$defs/expression"}},
+        "intent_paths": {"type": "array", "items": {"$ref": "#/$defs/intentPath"}}
+      }
+    },
+    "derivedField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field_id", "expression", "intent_paths"],
+      "properties": {
+        "field_id": {"type": "string", "minLength": 1},
+        "expression": {"$ref": "#/$defs/expression"},
+        "intent_paths": {"type": "array", "items": {"$ref": "#/$defs/intentPath"}}
+      }
+    },
+    "window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["window_id", "function", "args", "partition_by", "order_by", "output_field", "intent_paths"],
+      "properties": {
+        "window_id": {"type": "string", "minLength": 1},
+        "function": {"type": "string", "minLength": 1},
+        "args": {"type": "array", "items": {"$ref": "#/$defs/expression"}},
+        "partition_by": {"type": "array", "items": {"$ref": "#/$defs/expression"}},
+        "order_by": {"type": "array", "items": {"$ref": "#/$defs/ordering"}},
+        "output_field": {"type": "string", "minLength": 1},
+        "intent_paths": {"type": "array", "items": {"$ref": "#/$defs/intentPath"}}
+      }
+    },
+    "projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["output_id", "label", "expression", "intent_paths"],
+      "properties": {
+        "output_id": {"type": "string", "minLength": 1},
+        "label": {"type": ["string", "null"]},
+        "expression": {"$ref": "#/$defs/expression"},
+        "intent_paths": {"type": "array", "items": {"$ref": "#/$defs/intentPath"}}
+      }
+    },
+    "ordering": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["expression", "direction", "nulls"],
+      "properties": {
+        "expression": {"$ref": "#/$defs/expression"},
+        "direction": {"enum": ["asc", "desc"]},
+        "nulls": {"enum": ["dialect_default", "first", "last"]}
+      }
+    },
+    "limit": {
+      "type": ["object", "null"],
+      "required": ["count", "offset", "with_ties", "intent_paths"],
+      "properties": {
+        "count": {"type": "integer", "minimum": 1},
+        "offset": {"type": "integer", "minimum": 0},
+        "with_ties": {"type": "boolean"},
+        "intent_paths": {"type": "array", "items": {"$ref": "#/$defs/intentPath"}}
+      }
+    },
+    "setOperation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operator", "query_block_ref", "all", "intent_paths"],
+      "properties": {
+        "operator": {"enum": ["union", "intersect", "except"]},
+        "query_block_ref": {"type": "string", "minLength": 1},
+        "all": {"type": "boolean"},
+        "intent_paths": {"type": "array", "items": {"$ref": "#/$defs/intentPath"}}
+      }
+    },
+    "expression": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "enum": ["column", "literal", "parameter", "reference", "function", "binary", "unary", "conditional", "subquery", "star", "raw_sql_hint"]
+        },
+        "source": {"type": ["string", "null"], "description": "Alias or source_id declared in the containing query block. For query_block sources, the referenced name must be exposed by that block's projection."},
+        "name": {"type": ["string", "null"], "description": "Physical column name, or the exposed projection label/name when source refers to a query_block."},
+        "value": {},
+        "data_type": {"type": ["string", "null"]},
+        "operator": {"type": ["string", "null"]},
+        "args": {"type": "array", "items": {"$ref": "#/$defs/expression"}},
+        "left": {"$ref": "#/$defs/expression"},
+        "right": {"$ref": "#/$defs/expression"},
+        "operand": {"$ref": "#/$defs/expression"},
+        "branches": {"type": "array", "items": {"$ref": "#/$defs/conditionalBranch"}},
+        "else_expression": {"$ref": "#/$defs/expression"},
+        "query_block_ref": {"type": ["string", "null"]},
+        "distinct": {"type": "boolean"},
+        "intent_paths": {"type": "array", "items": {"$ref": "#/$defs/intentPath"}}
+      }
+    },
+    "conditionalBranch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["when", "then"],
+      "properties": {
+        "when": {"$ref": "#/$defs/expression"},
+        "then": {"$ref": "#/$defs/expression"}
+      }
+    },
+    "trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["intent_path", "sql_intent_nodes"],
+      "properties": {
+        "intent_path": {"$ref": "#/$defs/intentPath"},
+        "sql_intent_nodes": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+      }
+    },
+    "unresolved": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["intent_path", "concept", "reason", "candidates"],
+      "properties": {
+        "intent_path": {"$ref": "#/$defs/intentPath"},
+        "concept": {"type": "string", "minLength": 1},
+        "reason": {"type": "string", "minLength": 1},
+        "candidates": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "intentPath": {
+      "type": "string",
+      "pattern": "^/"
+    }
+  }
+}

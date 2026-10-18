@@ -1,0 +1,116 @@
+{
+  "evaluation_rule": "set(predicted_rows) == set(gold_rows)",
+  "timeout_seconds": 30.0,
+  "timeout_implementation": "SQLite progress handler (10,000 VM instructions)",
+  "connection_mode": "read-only; PRAGMA query_only=ON",
+  "provenance": {
+    "bif_only": {
+      "dataset_path": "D:\\Study\\York\\Dissertation\\revised_final_bif_sif\\0.bif\\data\\bird_dev.json",
+      "dataset_sha256": "630272f2b1c44d8cef2c3b246f623355cf0bbc1e832c81061df895530dfc2f06",
+      "run_roots": [
+        "D:\\Study\\York\\Dissertation\\revised_final_bif_sif\\0.bif\\runs\\0.bif_full_1534_20260821_2201",
+        "D:\\Study\\York\\Dissertation\\revised_final_bif_sif\\0.bif\\runs\\0.bif_full_1534_20260821_2201_"
+      ],
+      "conflicting_archived_sql": {}
+    },
+    "sif_only": {
+      "dataset_path": "D:\\Study\\York\\Dissertation\\revised_final_bif_sif\\1.sif\\data\\bird_dev.json",
+      "dataset_sha256": "630272f2b1c44d8cef2c3b246f623355cf0bbc1e832c81061df895530dfc2f06",
+      "run_roots": [
+        "D:\\Study\\York\\Dissertation\\revised_final_bif_sif\\1.sif\\runs\\1.sif_full_1534_20260831_215201"
+      ],
+      "conflicting_archived_sql": {}
+    },
+    "bif_sif": {
+      "dataset_path": "D:\\Study\\York\\Dissertation\\revised_final_bif_sif\\2.bif_sif\\data\\bird_dev.json",
+      "dataset_sha256": "630272f2b1c44d8cef2c3b246f623355cf0bbc1e832c81061df895530dfc2f06",
+      "run_roots": [
+        "D:\\Study\\York\\Dissertation\\revised_final_bif_sif\\2.bif_sif\\runs\\2.bif_sif_full_1534_20260823_012700"
+      ],
+      "conflicting_archived_sql": {}
+    }
+  },
+  "summary": {
+    "bif_only": {
+      "n": 1534,
+      "correct": 916,
+      "accuracy": 0.5971316818774446,
+      "status_counts": {
+        "execution_error": 3,
+        "ok": 1529,
+        "timeout": 2
+      },
+      "by_difficulty": {
+        "simple": {
+          "n": 925,
+          "correct": 617,
+          "accuracy": 0.667027027027027
+        },
+        "moderate": {
+          "n": 464,
+          "correct": 229,
+          "accuracy": 0.49353448275862066
+        },
+        "challenging": {
+          "n": 145,
+          "correct": 70,
+          "accuracy": 0.4827586206896552
+        }
+      }
+    },
+    "bif_sif": {
+      "n": 1534,
+      "correct": 1008,
+      "accuracy": 0.6571056062581486,
+      "status_counts": {
+        "execution_error": 1,
+        "ok": 1530,
+        "timeout": 3
+      },
+      "by_difficulty": {
+        "simple": {
+          "n": 925,
+          "correct": 673,
+          "accuracy": 0.7275675675675676
+        },
+        "moderate": {
+          "n": 464,
+          "correct": 264,
+          "accuracy": 0.5689655172413793
+        },
+        "challenging": {
+          "n": 145,
+          "correct": 71,
+          "accuracy": 0.4896551724137931
+        }
+      }
+    },
+    "sif_only": {
+      "n": 1534,
+      "correct": 861,
+      "accuracy": 0.5612777053455019,
+      "status_counts": {
+        "missing_prediction": 1,
+        "ok": 1530,
+        "timeout": 3
+      },
+      "by_difficulty": {
+        "simple": {
+          "n": 925,
+          "correct": 589,
+          "accuracy": 0.6367567567567568
+        },
+        "moderate": {
+          "n": 464,
+          "correct": 214,
+          "accuracy": 0.46120689655172414
+        },
+        "challenging": {
+          "n": 145,
+          "correct": 58,
+          "accuracy": 0.4
+        }
+      }
+    }
+  }
+}

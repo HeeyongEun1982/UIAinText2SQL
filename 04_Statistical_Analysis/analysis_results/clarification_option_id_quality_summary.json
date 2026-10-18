@@ -1,0 +1,106 @@
+{
+  "generated_at_utc": "2026-09-02T14:51:15.493605+00:00",
+  "analysis": "Clarification selected option ID membership in offered options",
+  "interpretation_note": "RQ1 decision-type coding did not use selected options or answers; these findings concern implementation and validity, not the RQ1 labels.",
+  "input": {
+    "rq1_normalized_path": "D:\\Study\\York\\Dissertation\\paper_draft\\v1.4\\#1\\5_evidence_data\\inputs\\rq1_turns_full.csv",
+    "rq1_normalized_sha256": "e456187d7bf100f082233f899e118e7aee55e773ecfd787ebc4a61e5bbd26315",
+    "combined_run_root": "D:\\Study\\York\\Dissertation\\revised_final_bif_sif\\2.bif_sif\\runs\\2.bif_sif_full_1534_20260823_012700"
+  },
+  "status_definition": {
+    "offered": "selected_option_id exactly matches a displayed option_id",
+    "supported_fallback": "selected_option_id is not displayed but is explicitly allowed by the combined SIF prompt (none_of_the_above)",
+    "not_offered": "selected_option_id is non-empty, is not displayed, and is not an explicitly supported fallback",
+    "missing": "selected_option_id is empty"
+  },
+  "by_condition_stage": {
+    "bif_only:BIF": {
+      "turns": 432,
+      "queries": 212,
+      "offered": 432,
+      "supported_fallback": 0,
+      "not_offered": 0,
+      "missing": 0,
+      "not_offered_percent": 0.0,
+      "missing_percent": 0.0,
+      "option_id_exception_total": 0,
+      "option_id_exception_percent": 0.0,
+      "invalid_source_json_with_ids_recovered": 0
+    },
+    "bif_sif:BIF": {
+      "turns": 4913,
+      "queries": 1284,
+      "offered": 4912,
+      "supported_fallback": 0,
+      "not_offered": 1,
+      "missing": 0,
+      "not_offered_percent": 0.0204,
+      "missing_percent": 0.0,
+      "option_id_exception_total": 1,
+      "option_id_exception_percent": 0.0204,
+      "invalid_source_json_with_ids_recovered": 0
+    },
+    "bif_sif:SIF": {
+      "turns": 6136,
+      "queries": 1534,
+      "offered": 6070,
+      "supported_fallback": 66,
+      "not_offered": 0,
+      "missing": 0,
+      "not_offered_percent": 0.0,
+      "missing_percent": 0.0,
+      "option_id_exception_total": 0,
+      "option_id_exception_percent": 0.0,
+      "invalid_source_json_with_ids_recovered": 0
+    },
+    "sif_only:SIF": {
+      "turns": 379,
+      "queries": 338,
+      "offered": 362,
+      "supported_fallback": 0,
+      "not_offered": 16,
+      "missing": 1,
+      "not_offered_percent": 4.2216,
+      "missing_percent": 0.2639,
+      "option_id_exception_total": 17,
+      "option_id_exception_percent": 4.4855,
+      "invalid_source_json_with_ids_recovered": 0
+    }
+  },
+  "sif_only_rq1_included": {
+    "turns": 375,
+    "queries": 334,
+    "offered": 358,
+    "supported_fallback": 0,
+    "not_offered": 16,
+    "missing": 1,
+    "not_offered_percent": 4.2667,
+    "missing_percent": 0.2667,
+    "option_id_exception_total": 17,
+    "option_id_exception_percent": 4.5333,
+    "invalid_source_json_with_ids_recovered": 0
+  },
+  "exceptional_selected_values": {
+    "bif_sif:BIF": {
+      "NONE": 1
+    },
+    "sif_only:SIF": {
+      "<missing>": 1,
+      "NONE": 2,
+      "Neither": 1,
+      "None": 12,
+      "None of the above": 1
+    }
+  },
+  "output": {
+    "by_turn_csv": "D:\\Study\\York\\Dissertation\\paper_draft\\v1.4\\#1\\5_evidence_data\\outputs\\clarification_option_id_quality_by_turn.csv",
+    "rows": 11860,
+    "sha256": "c170c6ab74fd13aeee9c4da90882164bd9e5fdaf69658ce54d5fd4ac57ce7e4e"
+  },
+  "validation": {
+    "expected_counts_pass": true,
+    "unique_condition_stage_qid_turn_pass": true,
+    "source_path_and_sha256_pass": true,
+    "unique_source_files_verified": 17996
+  }
+}

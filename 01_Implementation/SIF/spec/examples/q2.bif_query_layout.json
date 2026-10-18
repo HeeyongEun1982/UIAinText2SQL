@@ -1,0 +1,28 @@
+{
+  "schema_version": "4.0",
+  "phase": "bif",
+  "sources": [
+    {"id": "charter_school_records", "role": "charter schools", "table": null},
+    {"id": "school_directory", "role": "school ZIP directory", "table": null}
+  ],
+  "fields": [
+    {"id": "zip", "role": "requested ZIP code", "source": "school_directory", "column": null, "expression": null, "aggregate": null, "distinct": false},
+    {"id": "charter_status", "role": "charter school status", "source": "charter_school_records", "column": null, "expression": null, "aggregate": null, "distinct": false},
+    {"id": "organization", "role": "education organization", "source": "charter_school_records", "column": null, "expression": null, "aggregate": null, "distinct": false}
+  ],
+  "select": ["zip"],
+  "predicates": [
+    {"id": "is_charter", "field": "charter_status", "role": "school is charter", "operator": "=", "value": true},
+    {"id": "in_organization", "field": "organization", "role": "belongs to Fresno County Office of Education", "operator": "=", "value": "Fresno County Office of Education"}
+  ],
+  "where": "is_charter AND in_organization",
+  "group_by": [],
+  "having_predicates": [],
+  "having": null,
+  "order_by": [],
+  "joins": [
+    {"id": "school_record_link", "role": "connect charter attributes to ZIP", "type": null, "left_source": "charter_school_records", "left_column": null, "right_source": "school_directory", "right_column": null}
+  ],
+  "distinct": false,
+  "limit": null
+}

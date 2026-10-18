@@ -1,0 +1,10 @@
+﻿condition,architecture,official_status,count,percent
+bif_only,BIF-only,execution_error,3,0.19556714471968709
+bif_only,BIF-only,ok,1529,99.67405475880052
+bif_only,BIF-only,timeout,2,0.1303780964797914
+sif_only,SIF-only,missing_prediction,1,0.0651890482398957
+sif_only,SIF-only,ok,1530,99.73924380704042
+sif_only,SIF-only,timeout,3,0.19556714471968709
+bif_sif,BIF-SIF,execution_error,1,0.0651890482398957
+bif_sif,BIF-SIF,ok,1530,99.73924380704042
+bif_sif,BIF-SIF,timeout,3,0.19556714471968709

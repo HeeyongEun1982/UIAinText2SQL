@@ -1,0 +1,45 @@
+{
+  "archived_correct": 618,
+  "archived_gen_row_count_minus_one": {
+    "new_correct": 387,
+    "new_incorrect": 282,
+    "total": 669
+  },
+  "audit": "combined archived versus recomputed Official BIRD EX crosswalk",
+  "condition": "bif_sif",
+  "db_id_mismatch_count": 0,
+  "difficulty_mismatch_count": 0,
+  "generated_sql_mismatch_count_after_whitespace_normalization": 0,
+  "ground_truth_sql_mismatch_count_after_whitespace_normalization": 0,
+  "net_correct_difference": 390,
+  "old_to_new_transition_counts": {
+    "0_to_0": 512,
+    "0_to_1": 404,
+    "1_to_0": 14,
+    "1_to_1": 604
+  },
+  "question_id_range": {
+    "maximum": 1533,
+    "minimum": 0
+  },
+  "question_id_sets_identical": true,
+  "recomputed_correct": 1008,
+  "row_count": 1534,
+  "row_level_output": {
+    "path": "D:\\Study\\York\\Dissertation\\paper_draft\\v1.4\\#1\\5_evidence_data\\outputs\\combined_archived_vs_recomputed_official_ex_crosswalk.csv",
+    "sha256": "8112d85ad47c688381fb485412c5bbfb733efab70aaacd418de292ece5084f6e"
+  },
+  "sources": {
+    "archived_combined_run_summary": {
+      "path": "D:\\Study\\York\\Dissertation\\revised_final_bif_sif\\2.bif_sif\\runs\\2.bif_sif_full_1534_20260823_012700\\batch_summary_bird_official_ex.csv",
+      "row_count": 1534,
+      "sha256": "d4649809e7afaa922226a381827544eb109342ea7de479e29f04ada9687a0291"
+    },
+    "recomputed_official_ex": {
+      "all_condition_row_count": 4602,
+      "bif_sif_row_count": 1534,
+      "path": "D:\\Study\\York\\Dissertation\\paper_draft\\v1.4\\#1\\5_evidence_data\\inputs\\official_bird_ex_recomputed.csv",
+      "sha256": "dc7eaa3ad145d215ac2011a3709f1e8ad0b6a617ac9278ca1f5010ec4397090f"
+    }
+  }
+}

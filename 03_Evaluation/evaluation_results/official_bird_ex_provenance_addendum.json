@@ -1,0 +1,30 @@
+{
+  "purpose": "Immutable-source and invocation addendum for the Official EX census",
+  "created": "2026-09-02",
+  "official_evaluator": {
+    "repository": "AlibabaResearch/DAMO-ConvAI",
+    "commit": "dec31ae335d7a5168ee17d5cc40c105e0da66d4e",
+    "url": "https://github.com/AlibabaResearch/DAMO-ConvAI/blob/dec31ae335d7a5168ee17d5cc40c105e0da66d4e/bird/llm/src/evaluation.py",
+    "decision_rule": "set(predicted_rows) == set(gold_rows)",
+    "official_timeout_seconds": 30.0
+  },
+  "local_census": {
+    "script": "recompute_bird_official_ex.py",
+    "script_sha256": "9AC76671FC84135FAD67FCED38F32F588D36CFDCAB7C1CA76C34F151E2820B9D",
+    "invocation_workers": 8,
+    "workers_provenance": "operator/session record; the original summary JSON did not embed this argument",
+    "timeout_seconds": 30.0,
+    "csv": "official_bird_ex_recomputed.csv",
+    "csv_sha256": "DC7EAA3AD145D215AC2011A3709F1E8AD0B6A617AC9278CA1F5010EC4397090F",
+    "json": "official_bird_ex_recomputed.json",
+    "json_sha256": "1C8221B8B19EEBCF23B9A44EFCBEDD0C5509DA16C5BE2FF407D42537B6A535E4"
+  },
+  "runtime_audit": {
+    "manifest": "official_bird_ex_serial_rechecks.json",
+    "method": "Every non-ok census row was re-executed one case at a time with the same 30-second limit",
+    "score_changes": 0,
+    "status_changes": 1,
+    "status_change_case": "bif_only/q1479: census timeout; serial ok but result mismatch; Official EX remained 0"
+  },
+  "limitation": "The original census JSON records evaluator settings and artifact provenance but not the worker argument; this addendum preserves the operator/session record without altering the original locked generator outputs."
+}

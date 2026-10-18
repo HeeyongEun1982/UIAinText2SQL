@@ -1,0 +1,8 @@
+primary_failure_mode,label_ko,count,percent,query_n
+clarification_question_failure,명확화 질문 또는 선택지 문제,43,25.29,170
+clarification_answer_failure,명확화 답변 선택 문제,64,37.65,170
+confirmation_or_transfer_failure,확정 기록 또는 단계 간 전달 문제,29,17.06,170
+grounding_failure,데이터베이스 연결 문제,24,14.12,170
+sql_implementation_failure,최종 SQL 구현 문제,0,0.00,170
+compound_or_indeterminate,복합 또는 판정 불가,8,4.71,170
+timeout,실행 시간 초과,2,1.18,170

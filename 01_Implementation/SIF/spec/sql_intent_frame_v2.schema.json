@@ -1,0 +1,275 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/sql-intent-frame-2.0.json",
+  "title": "SQL Intent Frame 2.0",
+  "description": "BIF-aligned physical grounding overlay. It does not redefine BIF logic.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "sql_intent_id", "source_bif", "database", "status",
+    "target_population", "metrics", "calculation", "granularity", "scope",
+    "time_basis", "comparisons", "output_expectation", "semantic_slot_coverage", "physical_support",
+    "unresolved_groundings", "readiness"
+  ],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "sql_intent_id": {"type": "string", "minLength": 1},
+    "source_bif": {"$ref": "#/$defs/sourceBif"},
+    "database": {"$ref": "#/$defs/database"},
+    "status": {"enum": ["draft", "needs_grounding", "awaiting_confirmation", "ready", "blocked"]},
+    "target_population": {"$ref": "#/$defs/targetPopulation"},
+    "metrics": {"$ref": "#/$defs/metrics"},
+    "calculation": {"$ref": "#/$defs/calculation"},
+    "granularity": {"$ref": "#/$defs/granularity"},
+    "scope": {"$ref": "#/$defs/scope"},
+    "time_basis": {"$ref": "#/$defs/timeBasis"},
+    "comparisons": {"$ref": "#/$defs/comparisons"},
+    "output_expectation": {"$ref": "#/$defs/outputExpectation"},
+    "semantic_slot_coverage": {
+      "type": "array", "items": {"$ref": "#/$defs/semanticSlotCoverage"}
+    },
+    "physical_support": {"$ref": "#/$defs/physicalSupport"},
+    "unresolved_groundings": {"type": "array", "items": {"$ref": "#/$defs/unresolved"}},
+    "readiness": {"$ref": "#/$defs/readiness"}
+  },
+  "$defs": {
+    "sourceBif": {
+      "type": "object", "additionalProperties": false,
+      "required": ["frame_id", "revision", "frame_hash"],
+      "properties": {
+        "frame_id": {"type": "string", "minLength": 1},
+        "revision": {"type": "integer", "minimum": 1},
+        "frame_hash": {"type": "string", "minLength": 1}
+      }
+    },
+    "database": {
+      "type": "object", "additionalProperties": false,
+      "required": ["db_id", "dialect", "schema_fingerprint"],
+      "properties": {
+        "db_id": {"type": "string", "minLength": 1},
+        "dialect": {"type": "string", "minLength": 1},
+        "schema_fingerprint": {"type": ["string", "null"]}
+      }
+    },
+    "targetPopulation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["primary_entity_grounding", "inclusion_condition_groundings", "exclusion_condition_groundings", "inclusion_logic_ref", "exclusion_logic_ref"],
+      "properties": {
+        "primary_entity_grounding": {"$ref": "#/$defs/entityGrounding"},
+        "inclusion_condition_groundings": {"type": "array", "items": {"$ref": "#/$defs/conditionGrounding"}},
+        "exclusion_condition_groundings": {"type": "array", "items": {"$ref": "#/$defs/conditionGrounding"}},
+        "inclusion_logic_ref": {"type": "string", "pattern": "^/"},
+        "exclusion_logic_ref": {"type": "string", "pattern": "^/"}
+      }
+    },
+    "entityGrounding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["grounding_id", "semantic_slot_id", "constraint_coverage", "entity_ref", "source_ref", "status"],
+      "properties": {
+        "grounding_id": {"type": "string", "minLength": 1},
+        "semantic_slot_id": {"type": "string", "minLength": 1},
+        "constraint_coverage": {"$ref": "#/$defs/constraintCoverage"},
+        "entity_ref": {"type": "string", "pattern": "^/"},
+        "source_ref": {"type": ["string", "null"]},
+        "status": {"$ref": "#/$defs/groundingStatus"}
+      }
+    },
+    "conditionGrounding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["grounding_id", "semantic_slot_id", "constraint_coverage", "condition_ref", "binding_mode", "binding_composition", "bindings", "status"],
+      "properties": {
+        "grounding_id": {"type": "string", "minLength": 1},
+        "semantic_slot_id": {"type": "string", "minLength": 1},
+        "constraint_coverage": {"$ref": "#/$defs/constraintCoverage"},
+        "condition_ref": {"type": "string", "minLength": 1},
+        "binding_mode": {"$ref": "#/$defs/transformation"},
+        "binding_composition": {"enum": ["all_of", "any_of"]},
+        "bindings": {"type": "array", "items": {"$ref": "#/$defs/physicalBinding"}},
+        "status": {"$ref": "#/$defs/groundingStatus"}
+      }
+    },
+    "physicalBinding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_ref", "column", "sql_operator", "physical_value", "data_type", "transformation"],
+      "properties": {
+        "source_ref": {"type": "string", "minLength": 1},
+        "column": {"type": "string", "minLength": 1},
+        "sql_operator": {"type": ["string", "null"]},
+        "physical_value": {},
+        "data_type": {"type": ["string", "null"]},
+        "transformation": {"$ref": "#/$defs/transformation"}
+      }
+    },
+    "transformation": {
+      "enum": ["direct", "code_mapping", "range", "aggregation", "derived_expression", "window", "subquery", "set_operation", "type_cast", "date_component"]
+    },
+    "groundingStatus": {"enum": ["unresolved", "proposed", "confirmed", "system_resolved", "blocked"]},
+    "refGrounding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["grounding_id", "semantic_slot_id", "constraint_coverage", "semantic_ref", "binding_mode", "bindings", "implementation", "status"],
+      "properties": {
+        "grounding_id": {"type": "string", "minLength": 1},
+        "semantic_slot_id": {"type": "string", "minLength": 1},
+        "constraint_coverage": {"$ref": "#/$defs/constraintCoverage"},
+        "semantic_ref": {"type": "string", "minLength": 1},
+        "binding_mode": {"$ref": "#/$defs/transformation"},
+        "bindings": {"type": "array", "items": {"$ref": "#/$defs/physicalBinding"}},
+        "implementation": {"$ref": "#/$defs/semanticImplementationOrNull"},
+        "status": {"$ref": "#/$defs/groundingStatus"}
+      }
+    },
+    "metrics": {
+      "type": "object", "additionalProperties": false, "required": ["metric_groundings"],
+      "properties": {"metric_groundings": {"type": "array", "items": {"$ref": "#/$defs/refGrounding"}}}
+    },
+    "calculation": {
+      "type": "object", "additionalProperties": false, "required": ["step_groundings"],
+      "properties": {"step_groundings": {"type": "array", "items": {"$ref": "#/$defs/refGrounding"}}}
+    },
+    "granularity": {
+      "type": "object", "additionalProperties": false, "required": ["dimension_groundings"],
+      "properties": {"dimension_groundings": {"type": "array", "items": {"$ref": "#/$defs/refGrounding"}}}
+    },
+    "scope": {
+      "type": "object", "additionalProperties": false, "required": ["selection_groundings"],
+      "properties": {"selection_groundings": {"type": "array", "items": {"$ref": "#/$defs/refGrounding"}}}
+    },
+    "timeBasis": {
+      "type": "object", "additionalProperties": false, "required": ["period_groundings"],
+      "properties": {"period_groundings": {"type": "array", "items": {"$ref": "#/$defs/refGrounding"}}}
+    },
+    "comparisons": {
+      "type": "object", "additionalProperties": false, "required": ["comparison_groundings"],
+      "properties": {"comparison_groundings": {"type": "array", "items": {"$ref": "#/$defs/refGrounding"}}}
+    },
+    "outputExpectation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["field_groundings", "ordering_groundings"],
+      "properties": {
+        "field_groundings": {"type": "array", "items": {"$ref": "#/$defs/outputGrounding"}},
+        "ordering_groundings": {"type": "array", "items": {"$ref": "#/$defs/refGrounding"}}
+      }
+    },
+    "outputGrounding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["grounding_id", "semantic_slot_id", "constraint_coverage", "semantic_ref", "source_semantic_ref", "binding_mode", "bindings", "implementation", "status"],
+      "properties": {
+        "grounding_id": {"type": "string", "minLength": 1},
+        "semantic_slot_id": {"type": "string", "minLength": 1},
+        "constraint_coverage": {"$ref": "#/$defs/constraintCoverage"},
+        "semantic_ref": {"type": "string", "minLength": 1},
+        "source_semantic_ref": {"type": "string", "minLength": 1},
+        "binding_mode": {"$ref": "#/$defs/transformation"},
+        "bindings": {"type": "array", "items": {"$ref": "#/$defs/physicalBinding"}},
+        "implementation": {"$ref": "#/$defs/semanticImplementationOrNull"},
+        "status": {"$ref": "#/$defs/groundingStatus"}
+      }
+    },
+    "semanticImplementationOrNull": {
+      "oneOf": [{"type": "null"}, {"$ref": "#/$defs/semanticImplementation"}]
+    },
+    "constraintCoverage": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["constraint_id", "status", "evidence", "reason"],
+        "properties": {
+          "constraint_id": {"type": "string", "minLength": 1},
+          "status": {"enum": ["pending", "grounded", "not_applicable", "clarification_required", "unsupported"]},
+          "evidence": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "reason": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "semanticSlotCoverage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["semantic_slot_id", "grounding_ids", "status", "reason"],
+      "properties": {
+        "semantic_slot_id": {"type": "string", "minLength": 1},
+        "grounding_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "status": {"enum": ["pending", "grounded", "not_applicable", "unsupported"]},
+        "reason": {"type": ["string", "null"]}
+      }
+    },
+    "semanticImplementation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "operator", "input_refs", "distinct"],
+      "properties": {
+        "kind": {"enum": ["reference", "aggregate", "binary", "unary", "window", "selection", "set_operation", "existence", "custom"]},
+        "operator": {"type": "string", "minLength": 1},
+        "input_refs": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "distinct": {"type": "boolean"}
+      }
+    },
+    "physicalSupport": {
+      "type": "object", "additionalProperties": false,
+      "required": ["sources", "joins", "internal_expressions", "subquery_requirements"],
+      "properties": {
+        "sources": {"type": "array", "items": {"$ref": "#/$defs/source"}},
+        "joins": {"type": "array", "items": {"$ref": "#/$defs/join"}},
+        "internal_expressions": {"type": "array", "items": {"$ref": "#/$defs/internalNode"}},
+        "subquery_requirements": {"type": "array", "items": {"$ref": "#/$defs/internalNode"}}
+      }
+    },
+    "source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_id", "kind", "name", "alias", "origin_refs"],
+      "properties": {
+        "source_id": {"type": "string", "minLength": 1},
+        "kind": {"enum": ["table", "view", "query"]},
+        "name": {"type": "string", "minLength": 1},
+        "alias": {"type": ["string", "null"]},
+        "origin_refs": {"$ref": "#/$defs/originRefs"}
+      }
+    },
+    "join": {
+      "type": "object", "additionalProperties": false,
+      "required": ["join_id", "join_type", "left_source", "right_source", "key_pairs", "origin_refs"],
+      "properties": {
+        "join_id": {"type": "string", "minLength": 1},
+        "join_type": {"enum": ["inner", "left", "right", "full", "cross"]},
+        "left_source": {"type": "string", "minLength": 1},
+        "right_source": {"type": "string", "minLength": 1},
+        "key_pairs": {"type": "array", "items": {"$ref": "#/$defs/keyPair"}},
+        "origin_refs": {"$ref": "#/$defs/originRefs"}
+      }
+    },
+    "keyPair": {
+      "type": "object", "additionalProperties": false,
+      "required": ["left_column", "right_column"],
+      "properties": {
+        "left_column": {"type": "string", "minLength": 1},
+        "right_column": {"type": "string", "minLength": 1}
+      }
+    },
+    "internalNode": {
+      "type": "object", "additionalProperties": false,
+      "required": ["node_id", "purpose", "transformation", "origin_refs"],
+      "properties": {
+        "node_id": {"type": "string", "minLength": 1},
+        "purpose": {"type": "string", "minLength": 1},
+        "transformation": {"$ref": "#/$defs/transformation"},
+        "origin_refs": {"$ref": "#/$defs/originRefs"}
+      }
+    },
+    "originRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "unresolved": {
+      "type": "object", "additionalProperties": false,
+      "required": ["grounding_id", "semantic_ref", "reason", "owner"],
+      "properties": {
+        "grounding_id": {"type": "string", "minLength": 1},
+        "semantic_ref": {"type": "string", "minLength": 1},
+        "reason": {"type": "string", "minLength": 1},
+        "owner": {"enum": ["system", "user", "orchestrator"]}
+      }
+    },
+    "readiness": {
+      "type": "object", "additionalProperties": false,
+      "required": ["state", "blocking_refs"],
+      "properties": {
+        "state": {"enum": ["needs_grounding", "awaiting_confirmation", "ready", "blocked"]},
+        "blocking_refs": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

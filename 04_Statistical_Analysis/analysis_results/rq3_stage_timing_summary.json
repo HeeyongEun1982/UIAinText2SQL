@@ -1,0 +1,112 @@
+{
+  "scope": "All 486 RQ3 outcome-changing queries",
+  "definition": "Earliest lexically localised BIF-SIF clarification stage when available; not a causal failure-stage or first-origin label",
+  "topic_localisation": "Deterministic per-turn lexical topic rules from analyze_rq3_traces.py",
+  "clarification_link_source": "Language-model-assisted full-content census; author verification pending",
+  "script": {
+    "path": "analyze_rq3_stage_timing.py",
+    "sha256": "589a39cda23a15f478ebfd094c6c4125c54851b91cd282b255b9253d2ef2d5eb"
+  },
+  "inputs": {
+    "inputs\\rq3_census_case_bundle.jsonl": "5ff8f38f1bd94a145d77fbbc5acf98de44740d385b287e9003bb1dc9d2d559be",
+    "outputs\\rq3_census_review_final.csv": "3be6ca9159cb60850ac365e9fc02d5edcd8f98e874dfaa6206c32532308f6253"
+  },
+  "outputs": {
+    "outputs\\rq3_stage_timing_census.csv": "c08e244c0dafc8d9a22ba131fec123222bd24063c8ca48ca0b6529608c48a8d7",
+    "outputs\\rq3_stage_timing_summary.csv": "380d0619e827458ae64d2d7cbf33d13319c3e29ea83744f280eb74f650c40906",
+    "outputs\\rq3_stage_timing_by_locus.csv": "d5acfeb511b0251c06b9ca3f39e1ef9317de1e4963d8dfa6dc827ae97c6f1420"
+  },
+  "checks": {
+    "detail_rows_are_486": true,
+    "keys_are_unique": true,
+    "directions_are_316_and_170": true,
+    "structural_eligible_is_481": true,
+    "stage_categories_are_complete": true,
+    "presence_categories_are_complete": true,
+    "process_categories_are_complete": true,
+    "no_causal_attribution": true
+  },
+  "observable_process_path_summary": [
+    {
+      "classification": "observable_process_path",
+      "direction": "combined_correct",
+      "category": "same_choice_in_clarification_and_sql",
+      "category_label": "Same choice observed in prior clarification and final SQL",
+      "query_n": 316,
+      "count": 226,
+      "percent": 71.52
+    },
+    {
+      "classification": "observable_process_path",
+      "direction": "combined_correct",
+      "category": "partial_or_conflicting_correspondence",
+      "category_label": "Incomplete or conflicting relation across clarification records and final SQL",
+      "query_n": 316,
+      "count": 81,
+      "percent": 25.63
+    },
+    {
+      "classification": "observable_process_path",
+      "direction": "combined_correct",
+      "category": "no_relevant_clarification_record",
+      "category_label": "No relevant clarification record for the choice observed in final SQL",
+      "query_n": 316,
+      "count": 9,
+      "percent": 2.85
+    },
+    {
+      "classification": "observable_process_path",
+      "direction": "combined_incorrect",
+      "category": "same_choice_in_clarification_and_sql",
+      "category_label": "Same choice observed in prior clarification and final SQL",
+      "query_n": 170,
+      "count": 121,
+      "percent": 71.18
+    },
+    {
+      "classification": "observable_process_path",
+      "direction": "combined_incorrect",
+      "category": "partial_or_conflicting_correspondence",
+      "category_label": "Incomplete or conflicting relation across clarification records and final SQL",
+      "query_n": 170,
+      "count": 31,
+      "percent": 18.24
+    },
+    {
+      "classification": "observable_process_path",
+      "direction": "combined_incorrect",
+      "category": "no_relevant_clarification_record",
+      "category_label": "No relevant clarification record for the choice observed in final SQL",
+      "query_n": 170,
+      "count": 18,
+      "percent": 10.59
+    },
+    {
+      "classification": "observable_process_path",
+      "direction": "all_changed",
+      "category": "same_choice_in_clarification_and_sql",
+      "category_label": "Same choice observed in prior clarification and final SQL",
+      "query_n": 486,
+      "count": 347,
+      "percent": 71.4
+    },
+    {
+      "classification": "observable_process_path",
+      "direction": "all_changed",
+      "category": "partial_or_conflicting_correspondence",
+      "category_label": "Incomplete or conflicting relation across clarification records and final SQL",
+      "query_n": 486,
+      "count": 112,
+      "percent": 23.05
+    },
+    {
+      "classification": "observable_process_path",
+      "direction": "all_changed",
+      "category": "no_relevant_clarification_record",
+      "category_label": "No relevant clarification record for the choice observed in final SQL",
+      "query_n": 486,
+      "count": 27,
+      "percent": 5.56
+    }
+  ]
+}

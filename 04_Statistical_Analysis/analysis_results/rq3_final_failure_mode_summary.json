@@ -1,0 +1,36 @@
+{
+  "scope": "All 170 differing-outcome queries where BIF-SIF was incorrect and BIF Only or SIF Only was correct",
+  "analysis_direction": "Backward comparison from the main final SQL difference; not a first-observed-stage analysis",
+  "primary_failure_modes": {
+    "clarification_question_failure": 43,
+    "clarification_answer_failure": 64,
+    "confirmation_or_transfer_failure": 29,
+    "grounding_failure": 24,
+    "sql_implementation_failure": 0,
+    "compound_or_indeterminate": 8,
+    "timeout": 2
+  },
+  "confidence": {
+    "medium": 31,
+    "high": 139
+  },
+  "overwrites_earlier_correct_decision": 57,
+  "part_counts": {
+    "rq3_final_failure_coding_part1.csv": 57,
+    "rq3_final_failure_coding_part2.csv": 57,
+    "rq3_final_failure_coding_part3.csv": 56
+  },
+  "checks": {
+    "detail_rows_are_170": true,
+    "question_ids_match_reference": true,
+    "mode_counts_sum_to_170": true,
+    "pattern_counts": true,
+    "all_rows_model_assisted": true,
+    "no_rows_marked_author_verified": true,
+    "no_causal_attribution_permitted": true
+  },
+  "limitations": [
+    "Model-assisted content coding; author verification is pending",
+    "Operational failure-pattern attribution does not identify an independent causal effect"
+  ]
+}

@@ -1,0 +1,7 @@
+﻿scope,query_n,unchanged_n,unchanged_percent,changed_n,changed_percent
+all_changed_outcomes,486,481,98.97,5,1.03
+all_structural_comparisons,481,477,99.17,4,0.83
+bif_sif_correct_all,316,314,99.37,2,0.63
+bif_sif_incorrect_all,170,167,98.24,3,1.76
+bif_sif_correct_structural,313,312,99.68,1,0.32
+bif_sif_incorrect_structural,168,165,98.21,3,1.79

@@ -1,0 +1,45 @@
+{
+  "audit_date": "2026-09-02",
+  "purpose": "Serial audit of every non-ok row in the 8-worker Official EX census",
+  "input_file": "official_bird_ex_recomputed.csv",
+  "selection_rule": "status != ok",
+  "evaluation_rule": "set(predicted_rows) == set(gold_rows)",
+  "timeout_seconds": 30.0,
+  "execution_mode": "one case at a time",
+  "connection_mode": "read-only; PRAGMA query_only=ON",
+  "all_scores_unchanged": true,
+  "marginal_totals": {
+    "bif_only": 916,
+    "sif_only": 861,
+    "bif_sif": 1008
+  },
+  "status_changes": [
+    {
+      "condition": "bif_only",
+      "question_id": 1479,
+      "census_status": "timeout",
+      "serial_status": "ok",
+      "official_ex": 0,
+      "predicted_row_count": 0,
+      "gold_row_count": 1,
+      "elapsed_seconds": 27.875,
+      "error": "",
+      "interpretation": "Serial execution completed within 30 seconds, but the results mismatched."
+    }
+  ],
+  "rechecks": [
+    {"condition":"bif_only","question_id":26,"status":"execution_error","official_ex":0,"elapsed_seconds":0.016,"error":"no such column: frpm.FRPM Count (Ages 15-17)"},
+    {"condition":"bif_only","question_id":83,"status":"execution_error","official_ex":0,"elapsed_seconds":0.0,"error":"1st ORDER BY term does not match any column in the result set"},
+    {"condition":"bif_only","question_id":102,"status":"timeout","official_ex":0,"elapsed_seconds":30.015,"error":"interrupted"},
+    {"condition":"bif_only","question_id":682,"status":"execution_error","official_ex":0,"elapsed_seconds":0.0,"error":"no such function: year"},
+    {"condition":"bif_only","question_id":1479,"status":"ok","official_ex":0,"predicted_row_count":0,"gold_row_count":1,"elapsed_seconds":27.875,"error":""},
+    {"condition":"bif_sif","question_id":254,"status":"timeout","official_ex":0,"elapsed_seconds":30.016,"error":"interrupted"},
+    {"condition":"bif_sif","question_id":506,"status":"execution_error","official_ex":0,"elapsed_seconds":0.703,"error":"no such column: cards.isNonFoilOnly"},
+    {"condition":"bif_sif","question_id":637,"status":"timeout","official_ex":0,"elapsed_seconds":30.016,"error":"interrupted"},
+    {"condition":"bif_sif","question_id":1050,"status":"timeout","official_ex":0,"elapsed_seconds":30.015,"error":"interrupted"},
+    {"condition":"sif_only","question_id":83,"status":"missing_prediction","official_ex":0,"elapsed_seconds":0.0,"error":"Archived final SQL was not found"},
+    {"condition":"sif_only","question_id":506,"status":"timeout","official_ex":0,"elapsed_seconds":30.016,"error":"interrupted"},
+    {"condition":"sif_only","question_id":904,"status":"timeout","official_ex":0,"elapsed_seconds":30.016,"error":"interrupted"},
+    {"condition":"sif_only","question_id":956,"status":"timeout","official_ex":0,"elapsed_seconds":32.203,"error":"interrupted"}
+  ]
+}

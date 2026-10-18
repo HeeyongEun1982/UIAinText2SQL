@@ -1,0 +1,63 @@
+{
+  "coding": "language-model-assisted full-content review of every included turn",
+  "included_turns": 807,
+  "reviewed_turns": 807,
+  "unresolved": 0,
+  "changes_from_previous_final": {
+    "bif_only": 127,
+    "sif_only": 120
+  },
+  "review_inputs": {
+    "bif_only": {
+      "path": "D:\\Study\\York\\Dissertation\\paper_draft\\v1.4\\#1\\5_evidence_data\\outputs\\rq1_bif_full_content_review.csv",
+      "sha256": "46F22E9EF7519778789E9EB83C2492333C59444D903C48D89DC74299D7745382"
+    },
+    "sif_only": {
+      "path": "D:\\Study\\York\\Dissertation\\paper_draft\\v1.4\\#1\\5_evidence_data\\outputs\\rq1_sif_full_content_review.csv",
+      "sha256": "941F67EDC3FBE68D57CD0C89233ED9120506EF213A7A490E8ED7B8459702B306"
+    }
+  },
+  "final_native_counts": {
+    "bif_only": {
+      "MC": 51,
+      "OR": 17,
+      "PL": 46,
+      "RG": 106,
+      "RS": 103,
+      "SC": 31,
+      "TM": 38,
+      "UG": 40
+    },
+    "sif_only": {
+      "ATTRIBUTE": 12,
+      "GAP": 41,
+      "METRIC": 62,
+      "OUTPUT": 86,
+      "RANK": 10,
+      "REL": 87,
+      "SCOPE": 52,
+      "TEMP": 15,
+      "VALUE": 10
+    }
+  },
+  "analysis_denominators": {
+    "bif_only": {
+      "turns": 432,
+      "clarified_queries": 212,
+      "benchmark_queries": 1534,
+      "eligible_queries": 1534
+    },
+    "sif_only": {
+      "turns_after_qid_1_through_10_exclusion": 375,
+      "clarified_queries_after_exclusion": 334,
+      "benchmark_queries": 1534,
+      "eligible_queries_after_exclusion": 1524
+    }
+  },
+  "methodological_note": "The review used no selected answer, ground-truth SQL, generated SQL, or correctness field. It was not independently double-coded by human reviewers.",
+  "outputs": {
+    "turn_labels": "D:\\Study\\York\\Dissertation\\paper_draft\\v1.4\\#1\\5_evidence_data\\outputs\\rq1_turn_labels_final.csv",
+    "native_distribution": "D:\\Study\\York\\Dissertation\\paper_draft\\v1.4\\#1\\5_evidence_data\\outputs\\rq1_native_distribution_final.csv",
+    "common_distribution": "D:\\Study\\York\\Dissertation\\paper_draft\\v1.4\\#1\\5_evidence_data\\outputs\\rq1_common_distribution_final.csv"
+  }
+}

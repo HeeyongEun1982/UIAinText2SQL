@@ -1,0 +1,169 @@
+{
+  "schema_version": "1.0",
+  "sql_intent_id": "SIF_BIRD_0041",
+  "source_frame_id": "BIF_BIRD_0041",
+  "database": {
+    "db_id": "california_schools",
+    "dialect": "sqlite",
+    "schema_fingerprint": null
+  },
+  "status": "ready",
+  "query_blocks": [
+    {
+      "block_id": "Q_RANKED",
+      "role": "ranking",
+      "sources": [
+        {
+          "source_id": "SRC_SCORES",
+          "kind": "table",
+          "name": "satscores",
+          "block_ref": null,
+          "alias": "score",
+          "intent_paths": ["/metrics/0"]
+        },
+        {
+          "source_id": "SRC_SCHOOLS",
+          "kind": "table",
+          "name": "schools",
+          "block_ref": null,
+          "alias": "school",
+          "intent_paths": ["/target_population"]
+        }
+      ],
+      "joins": [
+        {
+          "join_id": "J1",
+          "type": "inner",
+          "left_source": "SRC_SCORES",
+          "right_source": "SRC_SCHOOLS",
+          "predicates": [
+            {
+              "kind": "binary",
+              "operator": "equals",
+              "left": {"kind": "column", "source": "score", "name": "cds"},
+              "right": {"kind": "column", "source": "school", "name": "CDSCode"}
+            }
+          ],
+          "intent_paths": ["/target_population", "/metrics/0"]
+        }
+      ],
+      "where": [
+        {
+          "kind": "binary",
+          "operator": "equals",
+          "left": {"kind": "column", "source": "school", "name": "Virtual"},
+          "right": {"kind": "literal", "value": "F"},
+          "intent_paths": ["/target_population/inclusion_conditions/0"]
+        }
+      ],
+      "derived_fields": [],
+      "group_by": [],
+      "having": [],
+      "windows": [
+        {
+          "window_id": "W1",
+          "function": "RANK",
+          "args": [],
+          "partition_by": [
+            {"kind": "column", "source": "school", "name": "County"}
+          ],
+          "order_by": [
+            {
+              "expression": {"kind": "column", "source": "score", "name": "AvgScrRead"},
+              "direction": "desc",
+              "nulls": "dialect_default"
+            }
+          ],
+          "output_field": "county_reading_rank",
+          "intent_paths": ["/scope/selections/0", "/calculation/steps/0"]
+        }
+      ],
+      "projection": [
+        {
+          "output_id": "school_name",
+          "label": "school name",
+          "expression": {"kind": "column", "source": "school", "name": "School"},
+          "intent_paths": ["/output_expectation/fields/0"]
+        },
+        {
+          "output_id": "average_reading_score",
+          "label": "average reading score",
+          "expression": {"kind": "column", "source": "score", "name": "AvgScrRead"},
+          "intent_paths": ["/metrics/0"]
+        },
+        {
+          "output_id": "county_reading_rank",
+          "label": "county reading rank",
+          "expression": {"kind": "reference", "name": "county_reading_rank"},
+          "intent_paths": ["/scope/selections/0", "/calculation/steps/0"]
+        }
+      ],
+      "distinct": false,
+      "order_by": [],
+      "limit": null,
+      "set_operations": [],
+      "intent_paths": ["/decision_objective", "/target_population", "/metrics/0", "/scope/selections/0"]
+    },
+    {
+      "block_id": "Q_FINAL",
+      "role": "main",
+      "sources": [
+        {
+          "source_id": "SRC_RANKED",
+          "kind": "query_block",
+          "name": null,
+          "block_ref": "Q_RANKED",
+          "alias": "ranked_school",
+          "intent_paths": ["/scope/selections/0"]
+        }
+      ],
+      "joins": [],
+      "where": [
+        {
+          "kind": "binary",
+          "operator": "less_or_equal",
+          "left": {"kind": "column", "source": "ranked_school", "name": "county_reading_rank"},
+          "right": {"kind": "literal", "value": 5},
+          "intent_paths": ["/scope/selections/0", "/calculation/steps/1"]
+        }
+      ],
+      "derived_fields": [],
+      "group_by": [],
+      "having": [],
+      "windows": [],
+      "projection": [
+        {
+          "output_id": "school_name",
+          "label": "school name",
+          "expression": {"kind": "column", "source": "ranked_school", "name": "school_name"},
+          "intent_paths": ["/output_expectation/fields/0"]
+        }
+      ],
+      "distinct": false,
+      "order_by": [],
+      "limit": null,
+      "set_operations": [],
+      "intent_paths": ["/decision_objective", "/output_expectation"]
+    }
+  ],
+  "main_block_id": "Q_FINAL",
+  "traceability": [
+    {
+      "intent_path": "/target_population/inclusion_conditions/0",
+      "sql_intent_nodes": ["Q_RANKED.where[0]"]
+    },
+    {
+      "intent_path": "/metrics/0",
+      "sql_intent_nodes": ["Q_RANKED.projection[1]", "Q_RANKED.windows[0].order_by[0]"]
+    },
+    {
+      "intent_path": "/scope/selections/0",
+      "sql_intent_nodes": ["Q_RANKED.windows[0]", "Q_FINAL.where[0]"]
+    },
+    {
+      "intent_path": "/output_expectation/fields/0",
+      "sql_intent_nodes": ["Q_FINAL.projection[0]"]
+    }
+  ],
+  "unresolved_grounding": []
+}

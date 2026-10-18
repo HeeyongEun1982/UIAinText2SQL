@@ -1,0 +1,201 @@
+{
+  "schema_version": "2.0",
+  "sql_intent_id": "sif2_bird_0087",
+  "source_bif": {
+    "frame_id": "bif_bird_0087",
+    "revision": 1,
+    "frame_hash": "replace-with-confirmed-bif-hash"
+  },
+  "database": {
+    "db_id": "california_schools",
+    "dialect": "sqlite",
+    "schema_fingerprint": null
+  },
+  "status": "ready",
+  "target_population": {
+    "primary_entity_grounding": {
+      "grounding_id": "ground_primary_entity",
+      "semantic_slot_id": "legacy:/target_population/primary_entity",
+      "constraint_coverage": [],
+      "entity_ref": "/target_population/primary_entity",
+      "source_ref": "schools",
+      "status": "system_resolved"
+    },
+    "inclusion_condition_groundings": [
+      {
+        "grounding_id": "ground_inc_county",
+        "semantic_slot_id": "legacy:cond_county_san_bernardino",
+        "constraint_coverage": [],
+        "condition_ref": "cond_county_san_bernardino",
+        "binding_mode": "direct",
+        "binding_composition": "all_of",
+        "bindings": [{
+          "source_ref": "schools",
+          "column": "County",
+          "sql_operator": "equals",
+          "physical_value": "San Bernardino",
+          "data_type": "text",
+          "transformation": "direct"
+        }],
+        "status": "system_resolved"
+      },
+      {
+        "grounding_id": "ground_inc_city",
+        "semantic_slot_id": "legacy:cond_city_san_bernardino",
+        "constraint_coverage": [],
+        "condition_ref": "cond_city_san_bernardino",
+        "binding_mode": "direct",
+        "binding_composition": "all_of",
+        "bindings": [{
+          "source_ref": "schools",
+          "column": "City",
+          "sql_operator": "equals",
+          "physical_value": "San Bernardino",
+          "data_type": "text",
+          "transformation": "direct"
+        }],
+        "status": "system_resolved"
+      },
+      {
+        "grounding_id": "ground_inc_open_date",
+        "semantic_slot_id": "legacy:cond_open_date_range",
+        "constraint_coverage": [],
+        "condition_ref": "cond_open_date_range",
+        "binding_mode": "range",
+        "binding_composition": "all_of",
+        "bindings": [{
+          "source_ref": "schools",
+          "column": "OpenDate",
+          "sql_operator": "between",
+          "physical_value": {
+            "start": "2009-01-01",
+            "end": "2010-12-31"
+          },
+          "data_type": "date",
+          "transformation": "range"
+        }],
+        "status": "system_resolved"
+      },
+      {
+        "grounding_id": "ground_inc_intermediate",
+        "semantic_slot_id": "legacy:cond_school_type_intermediate",
+        "constraint_coverage": [],
+        "condition_ref": "cond_school_type_intermediate",
+        "binding_mode": "code_mapping",
+        "binding_composition": "all_of",
+        "bindings": [{
+          "source_ref": "schools",
+          "column": "SOC",
+          "sql_operator": "equals",
+          "physical_value": "62",
+          "data_type": "text",
+          "transformation": "code_mapping"
+        }],
+        "status": "system_resolved"
+      },
+      {
+        "grounding_id": "ground_inc_unified",
+        "semantic_slot_id": "legacy:cond_school_type_unified",
+        "constraint_coverage": [],
+        "condition_ref": "cond_school_type_unified",
+        "binding_mode": "code_mapping",
+        "binding_composition": "all_of",
+        "bindings": [{
+          "source_ref": "schools",
+          "column": "DOC",
+          "sql_operator": "equals",
+          "physical_value": "54",
+          "data_type": "text",
+          "transformation": "code_mapping"
+        }],
+        "status": "system_resolved"
+      }
+    ],
+    "exclusion_condition_groundings": [],
+    "inclusion_logic_ref": "/target_population/inclusion_logic",
+    "exclusion_logic_ref": "/target_population/exclusion_logic"
+  },
+  "metrics": {
+    "metric_groundings": [{
+      "grounding_id": "ground_metric_admin_email",
+      "semantic_slot_id": "legacy:metric_valid_admin_email",
+      "constraint_coverage": [],
+      "semantic_ref": "metric_valid_admin_email",
+      "binding_mode": "direct",
+      "implementation": null,
+      "bindings": [
+        {
+          "source_ref": "schools",
+          "column": "AdmEmail1",
+          "sql_operator": null,
+          "physical_value": null,
+          "data_type": "text",
+          "transformation": "direct"
+        },
+        {
+          "source_ref": "schools",
+          "column": "AdmEmail2",
+          "sql_operator": null,
+          "physical_value": null,
+          "data_type": "text",
+          "transformation": "direct"
+        }
+      ],
+      "status": "system_resolved"
+    }]
+  },
+  "calculation": {"step_groundings": []},
+  "granularity": {"dimension_groundings": []},
+  "scope": {"selection_groundings": []},
+  "time_basis": {"period_groundings": []},
+  "comparisons": {"comparison_groundings": []},
+  "output_expectation": {
+    "field_groundings": [{
+      "grounding_id": "ground_output_admin_email",
+      "semantic_slot_id": "legacy:field_admin_email",
+      "constraint_coverage": [],
+      "semantic_ref": "field_admin_email",
+      "source_semantic_ref": "metric_valid_admin_email",
+      "binding_mode": "direct",
+      "implementation": null,
+      "bindings": [
+        {
+          "source_ref": "schools",
+          "column": "AdmEmail1",
+          "sql_operator": null,
+          "physical_value": null,
+          "data_type": "text",
+          "transformation": "direct"
+        },
+        {
+          "source_ref": "schools",
+          "column": "AdmEmail2",
+          "sql_operator": null,
+          "physical_value": null,
+          "data_type": "text",
+          "transformation": "direct"
+        }
+      ],
+      "status": "system_resolved"
+    }],
+    "ordering_groundings": []
+  },
+  "semantic_slot_coverage": [],
+  "physical_support": {
+    "sources": [{
+      "source_id": "schools",
+      "kind": "table",
+      "name": "schools",
+      "alias": "s",
+      "origin_refs": ["/target_population/primary_entity"]
+    }],
+    "joins": [],
+    "internal_expressions": [],
+    "subquery_requirements": []
+  },
+  "unresolved_groundings": [],
+  "readiness": {
+    "state": "ready",
+    "blocking_refs": []
+  }
+}

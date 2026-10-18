@@ -1,0 +1,228 @@
+{
+  "schema_version": "2.0",
+  "sql_intent_id": "reference_sif_q87",
+  "source_bif": {
+    "frame_id": "reference_bif_q87",
+    "revision": 1,
+    "frame_hash": "reference-only-recompute-before-runtime-validation"
+  },
+  "database": {
+    "db_id": "california_schools",
+    "dialect": "sqlite",
+    "schema_fingerprint": null
+  },
+  "status": "ready",
+  "target_population": {
+    "primary_entity_grounding": {
+      "grounding_id": "ground_primary_entity",
+      "semantic_slot_id": "legacy:/target_population/primary_entity",
+      "constraint_coverage": [],
+      "entity_ref": "/target_population/primary_entity",
+      "source_ref": "schools_source",
+      "status": "system_resolved"
+    },
+    "inclusion_condition_groundings": [
+      {
+        "grounding_id": "ground_inc_county",
+        "semantic_slot_id": "legacy:county_san_bernardino",
+        "constraint_coverage": [],
+        "condition_ref": "county_san_bernardino",
+        "binding_mode": "direct",
+        "binding_composition": "all_of",
+        "bindings": [{
+          "source_ref": "schools_source",
+          "column": "County",
+          "sql_operator": "equals",
+          "physical_value": "San Bernardino",
+          "data_type": "text",
+          "transformation": "direct"
+        }],
+        "status": "system_resolved"
+      },
+      {
+        "grounding_id": "ground_inc_city",
+        "semantic_slot_id": "legacy:city_san_bernardino",
+        "constraint_coverage": [],
+        "condition_ref": "city_san_bernardino",
+        "binding_mode": "direct",
+        "binding_composition": "all_of",
+        "bindings": [{
+          "source_ref": "schools_source",
+          "column": "City",
+          "sql_operator": "equals",
+          "physical_value": "San Bernardino",
+          "data_type": "text",
+          "transformation": "direct"
+        }],
+        "status": "system_resolved"
+      },
+      {
+        "grounding_id": "ground_inc_public_intermediate_middle",
+        "semantic_slot_id": "legacy:public_intermediate_middle",
+        "constraint_coverage": [],
+        "condition_ref": "public_intermediate_middle",
+        "binding_mode": "code_mapping",
+        "binding_composition": "all_of",
+        "bindings": [{
+          "source_ref": "schools_source",
+          "column": "SOC",
+          "sql_operator": "equals",
+          "physical_value": "62",
+          "data_type": "text",
+          "transformation": "code_mapping"
+        }],
+        "status": "system_resolved"
+      },
+      {
+        "grounding_id": "ground_inc_unified_school",
+        "semantic_slot_id": "legacy:unified_school",
+        "constraint_coverage": [],
+        "condition_ref": "unified_school",
+        "binding_mode": "code_mapping",
+        "binding_composition": "all_of",
+        "bindings": [{
+          "source_ref": "schools_source",
+          "column": "DOC",
+          "sql_operator": "equals",
+          "physical_value": "54",
+          "data_type": "text",
+          "transformation": "code_mapping"
+        }],
+        "status": "system_resolved"
+      }
+    ],
+    "exclusion_condition_groundings": [],
+    "inclusion_logic_ref": "/target_population/inclusion_logic",
+    "exclusion_logic_ref": "/target_population/exclusion_logic"
+  },
+  "metrics": {
+    "metric_groundings": [{
+      "grounding_id": "ground_metric_administrator_email_addresses",
+      "semantic_slot_id": "legacy:administrator_email_addresses",
+      "constraint_coverage": [],
+      "semantic_ref": "administrator_email_addresses",
+      "binding_mode": "direct",
+      "bindings": [
+        {
+          "source_ref": "schools_source",
+          "column": "AdmEmail1",
+          "sql_operator": null,
+          "physical_value": null,
+          "data_type": "text",
+          "transformation": "direct"
+        },
+        {
+          "source_ref": "schools_source",
+          "column": "AdmEmail2",
+          "sql_operator": null,
+          "physical_value": null,
+          "data_type": "text",
+          "transformation": "direct"
+        }
+      ],
+      "implementation": null,
+      "status": "system_resolved"
+    }]
+  },
+  "calculation": {"step_groundings": []},
+  "granularity": {"dimension_groundings": []},
+  "scope": {"selection_groundings": []},
+  "time_basis": {
+    "period_groundings": [{
+      "grounding_id": "ground_period_open_date",
+      "semantic_slot_id": "legacy:period:2009-01-01|2010-12-31|day",
+      "constraint_coverage": [],
+      "semantic_ref": "period:2009-01-01|2010-12-31|day",
+      "binding_mode": "date_component",
+      "bindings": [{
+        "source_ref": "schools_source",
+        "column": "OpenDate",
+        "sql_operator": "between",
+        "physical_value": {"start": "2009-01-01", "end": "2010-12-31"},
+        "data_type": "date",
+        "transformation": "date_component"
+      }],
+      "implementation": {
+        "kind": "custom",
+        "operator": "inclusive_year_range",
+        "input_refs": ["period:2009-01-01|2010-12-31|day"],
+        "distinct": false
+      },
+      "status": "system_resolved"
+    }]
+  },
+  "comparisons": {"comparison_groundings": []},
+  "output_expectation": {
+    "field_groundings": [{
+      "grounding_id": "ground_output_administrator_email_addresses_output",
+      "semantic_slot_id": "legacy:administrator_email_addresses_output",
+      "constraint_coverage": [],
+      "semantic_ref": "administrator_email_addresses_output",
+      "source_semantic_ref": "administrator_email_addresses",
+      "binding_mode": "direct",
+      "bindings": [
+        {
+          "source_ref": "schools_source",
+          "column": "AdmEmail1",
+          "sql_operator": null,
+          "physical_value": null,
+          "data_type": "text",
+          "transformation": "direct"
+        },
+        {
+          "source_ref": "schools_source",
+          "column": "AdmEmail2",
+          "sql_operator": null,
+          "physical_value": null,
+          "data_type": "text",
+          "transformation": "direct"
+        }
+      ],
+      "implementation": null,
+      "status": "system_resolved"
+    }],
+    "ordering_groundings": []
+  },
+  "semantic_slot_coverage": [],
+  "physical_support": {
+    "sources": [
+      {
+        "source_id": "schools_source",
+        "kind": "table",
+        "name": "schools",
+        "alias": "T2",
+        "origin_refs": ["/target_population/primary_entity"]
+      },
+      {
+        "source_id": "frpm_source",
+        "kind": "table",
+        "name": "frpm",
+        "alias": "T1",
+        "origin_refs": ["benchmark_gold_sql:hidden_record_population"]
+      }
+    ],
+    "joins": [{
+      "join_id": "join_frpm_schools",
+      "join_type": "inner",
+      "left_source": "frpm_source",
+      "right_source": "schools_source",
+      "key_pairs": [{
+        "left_column": "CDSCode",
+        "right_column": "CDSCode"
+      }],
+      "origin_refs": ["benchmark_gold_sql:hidden_record_population"]
+    }],
+    "internal_expressions": [{
+      "node_id": "open_date_year_range",
+      "purpose": "Apply SQLite year extraction to OpenDate and compare inclusively from 2009 through 2010.",
+      "transformation": "date_component",
+      "origin_refs": ["/time_basis/periods/0"]
+    }],
+    "subquery_requirements": []
+  },
+  "unresolved_groundings": [],
+  "readiness": {
+    "state": "ready",
+    "blocking_refs": []
+  }
+}

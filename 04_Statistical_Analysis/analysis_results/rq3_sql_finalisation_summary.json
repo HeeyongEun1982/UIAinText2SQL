@@ -1,0 +1,107 @@
+{
+  "scope": "All 486 RQ3 queries with different system outcomes",
+  "comparison": "synthesized_sql versus final_sql after stripping leading and trailing whitespace only",
+  "interpretation": "Whether retained SQL changed after initial synthesis; not a causal failure-stage or first-origin label",
+  "changed_question_ids": [
+    195,
+    415,
+    904,
+    1016,
+    1126
+  ],
+  "correction_call_question_ids": [
+    195,
+    415,
+    637,
+    904,
+    1016,
+    1050,
+    1126
+  ],
+  "summary": [
+    {
+      "scope": "all_changed_outcomes",
+      "query_n": 486,
+      "unchanged_n": 481,
+      "unchanged_percent": 98.97,
+      "changed_n": 5,
+      "changed_percent": 1.03
+    },
+    {
+      "scope": "all_structural_comparisons",
+      "query_n": 481,
+      "unchanged_n": 477,
+      "unchanged_percent": 99.17,
+      "changed_n": 4,
+      "changed_percent": 0.83
+    },
+    {
+      "scope": "bif_sif_correct_all",
+      "query_n": 316,
+      "unchanged_n": 314,
+      "unchanged_percent": 99.37,
+      "changed_n": 2,
+      "changed_percent": 0.63
+    },
+    {
+      "scope": "bif_sif_incorrect_all",
+      "query_n": 170,
+      "unchanged_n": 167,
+      "unchanged_percent": 98.24,
+      "changed_n": 3,
+      "changed_percent": 1.76
+    },
+    {
+      "scope": "bif_sif_correct_structural",
+      "query_n": 313,
+      "unchanged_n": 312,
+      "unchanged_percent": 99.68,
+      "changed_n": 1,
+      "changed_percent": 0.32
+    },
+    {
+      "scope": "bif_sif_incorrect_structural",
+      "query_n": 168,
+      "unchanged_n": 165,
+      "unchanged_percent": 98.21,
+      "changed_n": 3,
+      "changed_percent": 1.79
+    }
+  ],
+  "checks": {
+    "all_486_linking_frames_present": true,
+    "all_final_artifacts_match": true,
+    "outcome_directions_are_316_and_170": true,
+    "all_condition_execution_ok_is_481": true,
+    "changed_qids_are_expected": true,
+    "correction_calls_are_expected": true,
+    "structural_groups_are_313_and_168": true,
+    "structural_changes_are_1_and_3": true,
+    "no_causal_or_first_origin_claim": true
+  },
+  "sources": {
+    "rq3_manifest": {
+      "path": "outputs/rq3_census_manifest.csv",
+      "sha256": "557c19fab45fd6d0a2341002e468be639a887cf55a482a825f5abe78a98f9820"
+    },
+    "runner_implementation": {
+      "path": "revised_final_bif_sif/2.bif_sif/intent_sql_agent/src/intent_sql_agent/pipeline/full_case_runner.py",
+      "sha256": "bf8350d87ea6be9d1b672070323a6d1749e225c664b2f18936d0f097f0e7439f",
+      "relevant_lines": "2241-2272"
+    }
+  },
+  "artifacts": {
+    "input_snapshot": {
+      "path": "inputs/rq3_bif_sif_initial_final_sql.jsonl",
+      "sha256": "cf3f63c168443d7e2271ae89efffaa733226ea49e165b32c9a3ad81bada581d5"
+    },
+    "detail": {
+      "path": "outputs/rq3_sql_finalisation_census.csv",
+      "sha256": "b9f8e13ae6f216dd37184f147cbd16b5c8cf250bead65869385d5e7ff3a190aa"
+    },
+    "summary_csv": {
+      "path": "outputs/rq3_sql_finalisation_summary.csv",
+      "sha256": "c341c2832de0b0662f22103cb4df2972ac3406c6e053a4eeb0ff2816031142cd"
+    }
+  }
+}
